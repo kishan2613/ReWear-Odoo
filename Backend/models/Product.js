@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['Men', 'Women', 'Kids', 'Accessories', 'Footwear', 'Others'],
+    enum: ['Ethnic Wear', 'Casual Wear', "Men's Activewear", "Women's Activewear", 'Western Wear', 'Footwear', 'Sportswear', 'Office Wear', "Men's Ethnic Wear", "Size Inclusive Styles"],
     required: true
   },
   description: {
@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema({
     required: true
   },
   images: [{
-    type: String // Array of image URLs or paths
+    type: String 
   }],
   likes: {
     type: Number,
