@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Logo from "/Logo.png"
 
 // Premium Navbar Component
 const PremiumNavbar = () => {

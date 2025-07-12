@@ -32,7 +32,7 @@ const categoriesData = [
     id: 2,
     name: "Women",
     image:
-      "https://images.unsplash.com/photo-1494790108755-2616c39a9e23?w=400&h=500&fit=crop",
+      "https://tse3.mm.bing.net/th/id/OIP.WWvdzNPX5bQmNilTx7gCqAHaEK?pid=Api&P=0&h=180",
     count: "3.2K+ Pieces",
     tagline: "Elegance defined",
   },
@@ -58,8 +58,8 @@ const productsData = [
   {
     id: 1,
     name: "Ethereal Cotton Essence",
-    price: "₹1,299",
-    originalPrice: "₹1,999",
+    price: "1,299 coins",
+    originalPrice: "1,999",
     image:
       "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop",
     discount: "35% OFF",
@@ -68,8 +68,8 @@ const productsData = [
   {
     id: 2,
     name: "Midnight Denim Dreams",
-    price: "₹2,499",
-    originalPrice: "₹3,999",
+    price: "2,499 coins",
+    originalPrice: "3,999",
     image:
       "https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=400&h=500&fit=crop",
     discount: "38% OFF",
@@ -78,8 +78,8 @@ const productsData = [
   {
     id: 3,
     name: "Artisan Leather Legacy",
-    price: "₹3,199",
-    originalPrice: "₹4,999",
+    price: "3,199 coins",
+    originalPrice: "4,999",
     image:
       "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=500&fit=crop",
     discount: "36% OFF",
@@ -88,8 +88,8 @@ const productsData = [
   {
     id: 4,
     name: "Cloud Walker Luxe",
-    price: "₹4,299",
-    originalPrice: "₹5,999",
+    price: "4,299 coins",
+    originalPrice: "5,999",
     image:
       "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=400&h=500&fit=crop",
     discount: "28% OFF",
@@ -98,8 +98,8 @@ const productsData = [
   {
     id: 5,
     name: "Silk Whisper Blouse",
-    price: "₹1,899",
-    originalPrice: "₹2,999",
+    price: "1,899 coins",
+    originalPrice: "2,999",
     image:
       "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=500&fit=crop",
     discount: "37% OFF",
@@ -108,8 +108,8 @@ const productsData = [
   {
     id: 6,
     name: "Executive Power Suit",
-    price: "₹3,499",
-    originalPrice: "₹5,499",
+    price: "3,499 coins",
+    originalPrice: "5,499",
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop",
     discount: "36% OFF",
