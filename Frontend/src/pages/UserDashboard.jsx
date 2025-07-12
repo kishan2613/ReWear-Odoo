@@ -13,137 +13,127 @@ const UserDashboard = () => {
 
   // Hardcoded fallback data
   const fallbackUserData = {
-    _id: '64a7b8c9d1e2f3g4h5i6j7k8',
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    address: 'Mumbai, Maharashtra',
-    bio: 'Fashion enthusiast and sustainable shopping advocate. Love finding unique pieces and giving preloved items a new life.',
-    points: 150,
+    _id: 'fallback-user-id', // Changed ID slightly to make it clear it's fallback
+    name: 'Fallback User', // Use a generic name to make it clear
+    email: 'fallback.user@example.com', // Use a generic email
+    address: 'Mumbai, Maharashtra', // Specific address
+    bio: 'Fashion enthusiast and sustainable shopping advocate. Love finding unique pieces and giving preloved items a new life.', // Specific bio
+    points: 150, // Specific stats
     successfulSwaps: 15,
     totalSoldItems: 12,
     totalPurchasedItems: 8,
-    earnings: 25000,
-    spent: 18000,
-    likedItems: ['64a7b8c9d1e2f3g4h5i6j7k9', '64a7b8c9d1e2f3g4h5i6j7l0'],
-    createdAt: '2024-01-15T00:00:00.000Z'
+    earnings: 0,
+    spent: 0,
+    likedItems: [], // No specific liked items for fallback
+    createdAt: '2024-01-01T00:00:00.000Z' // Generic date
   };
 
   const fallbackProducts = [
     {
-      _id: '1',
-      productName: 'Designer Silk Saree',
-      category: 'Ethnic Wear',
-      description: 'Beautiful handwoven silk saree with intricate gold embroidery.',
-      heroImage: '/api/placeholder/200/200',
-      originalPrice: 8500,
-      expectedPrice: 4200,
-      likes: 15,
+      _id: 'fallback-prod-1', // Changed IDs
+      productName: 'Mock Listing 1', // Generic name
+      category: 'Category A', // Generic category
+      description: 'This is a mock product listing.',
+      heroImage: '/api/placeholder/200/200', // Use placeholder
+      originalPrice: 0,
+      expectedPrice: 0,
+      likes: 5,
       status: 'Available',
-      createdAt: '2024-03-15T00:00:00.000Z'
+      createdAt: '2024-03-01T00:00:00.000Z' // Generic date
     },
     {
-      _id: '2',
-      productName: 'Nike Air Max Sneakers',
-      category: 'Footwear',
-      description: 'Brand new Nike Air Max sneakers, comfortable and stylish.',
+      _id: 'fallback-prod-2',
+      productName: 'Mock Listing 2',
+      category: 'Category B',
+      description: 'This is another mock product listing.',
       heroImage: '/api/placeholder/200/200',
-      originalPrice: 12000,
-      expectedPrice: 7500,
-      likes: 23,
+      originalPrice: 0,
+      expectedPrice: 0,
+      likes: 10,
       status: 'Sold',
-      createdAt: '2024-02-20T00:00:00.000Z'
-    },
-    {
-      _id: '3',
-      productName: 'Formal Blazer Set',
-      category: 'Office Wear',
-      description: 'Professional black blazer with matching trousers.',
-      heroImage: '/api/placeholder/200/200',
-      originalPrice: 6500,
-      expectedPrice: 3800,
-      likes: 8,
-      status: 'In Negotiation',
-      createdAt: '2024-01-10T00:00:00.000Z'
-    },
-    {
-      _id: '4',
-      productName: 'Casual Denim Jacket',
-      category: 'Casual Wear',
-      description: 'Classic denim jacket in excellent condition.',
-      heroImage: '/api/placeholder/200/200',
-      originalPrice: 4500,
-      expectedPrice: 2800,
-      likes: 31,
-      status: 'Available',
-      createdAt: '2024-03-01T00:00:00.000Z'
+      createdAt: '2024-02-15T00:00:00.000Z'
     }
+    // Reduced fallback products for brevity, add more if needed
   ];
 
   const fallbackPurchases = [
-    {
-      _id: '1',
-      productName: 'Vintage Kurta',
-      category: 'Ethnic Wear',
-      heroImage: '/api/placeholder/200/200',
-      expectedPrice: 2100,
+     {
+      _id: 'fallback-purchase-1', // Changed IDs
+      productName: 'Mock Purchase 1', // Generic name
+      category: 'Category X', // Generic category
+      heroImage: '/api/placeholder/200/200', // Use placeholder
+      expectedPrice: 0,
       status: 'Delivered',
-      purchaseDate: '2024-03-10T00:00:00.000Z'
+      purchaseDate: '2024-03-20T00:00:00.000Z' // Generic date
     },
     {
-      _id: '2',
-      productName: 'Casual Sneakers',
-      category: 'Footwear',
+      _id: 'fallback-purchase-2',
+      productName: 'Mock Purchase 2',
+      category: 'Category Y',
       heroImage: '/api/placeholder/200/200',
-      expectedPrice: 3200,
+      expectedPrice: 0,
       status: 'Shipped',
-      purchaseDate: '2024-03-05T00:00:00.000Z'
-    },
-    {
-      _id: '3',
-      productName: 'Summer Dress',
-      category: 'Western Wear',
-      heroImage: '/api/placeholder/200/200',
-      expectedPrice: 1800,
-      status: 'Processing',
-      purchaseDate: '2024-02-28T00:00:00.000Z'
-    },
-    {
-      _id: '4',
-      productName: 'Cotton Shirt',
-      category: 'Casual Wear',
-      heroImage: '/api/placeholder/200/200',
-      expectedPrice: 1200,
-      status: 'Delivered',
-      purchaseDate: '2024-02-15T00:00:00.000Z'
+      purchaseDate: '2024-03-10T00:00:00.000Z'
     }
+    // Reduced fallback purchases for brevity, add more if needed
   ];
+
 
   // Fetch user data
   const fetchUserData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/users/profile', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json'
-        }
-      });
+      // Note: Your React code uses /api/users/profile with a token,
+      // while the prompt mentions /api/user/details with userId in body.
+      const response = await fetch('http://localhost:5000/api/auth/details', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    userId: localStorage.getItem('userIDRewear')
+  })
+});
 
-      if (!response.ok) {
-        throw new Error('Failed to fetch user data');
-      }
+if (!response.ok) {
+  // Throw an error to trigger the catch block and use fallback
+  throw new Error('Failed to fetch user data');
+}
 
-      const data = await response.json();
-      setUserData(data);
+const data = await response.json();
+setUserData(data); // Use real data if fetch is successful
+
+
     } catch (err) {
-      console.warn('Using fallback user data:', err.message);
-      setUserData(fallbackUserData);
+      console.warn('Failed to fetch user data. Using mocked fallback data.', err.message);
+
+      // --- START MODIFICATION ---
+      // Create a mocked version of the fallback data
+      // Show only basic identification, hide specific details/stats
+      const mockedFallbackUserData = {
+        _id: fallbackUserData._id, // Keep a fallback ID
+        name: fallbackUserData.name, // Show generic fallback name
+        email: fallbackUserData.email, // Show generic fallback email
+        // Mock or hide other fields
+        address: 'Address not available', // Mocked value
+        bio: 'User bio not available.', // Mocked value
+        points: 0, // Mocked value (set to 0)
+        successfulSwaps: 0, // Mocked value (set to 0)
+        totalSoldItems: 0, // Mocked value (set to 0)
+        totalPurchasedItems: 0, // Mocked value (set to 0)
+        earnings: 0, // Mocked value (set to 0)
+        spent: 0, // Mocked value (set to 0)
+        likedItems: [], // Mocked value (empty array)
+        createdAt: fallbackUserData.createdAt // Keep generic date
+      };
+      setUserData(mockedFallbackUserData); // Set state with the mocked fallback data
+      // --- END MODIFICATION ---
     }
   };
 
-  // Fetch user products
+  // Fetch user products (no change needed here based on your request)
   const fetchUserProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/products/user', {
+      const response = await fetch(`http://localhost:5000/api/products/user/${localStorage.getItem('userIDRewear')}`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json'
@@ -158,11 +148,11 @@ const UserDashboard = () => {
       setUserProducts(data);
     } catch (err) {
       console.warn('Using fallback products data:', err.message);
-      setUserProducts(fallbackProducts);
+      setUserProducts(fallbackProducts); // Still use specific fallback products if fetch fails
     }
   };
 
-  // Fetch user purchases
+  // Fetch user purchases (no change needed here based on your request)
   const fetchUserPurchases = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/orders/purchases', {
@@ -180,15 +170,17 @@ const UserDashboard = () => {
       setUserPurchases(data);
     } catch (err) {
       console.warn('Using fallback purchases data:', err.message);
-      setUserPurchases(fallbackPurchases);
+      setUserPurchases(fallbackPurchases); // Still use specific fallback purchases if fetch fails
     }
   };
 
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
+      // Fetch user data first as other fetches might depend on it (though not in this example)
+      await fetchUserData();
+      // Fetch products and purchases concurrently
       await Promise.all([
-        fetchUserData(),
         fetchUserProducts(),
         fetchUserPurchases()
       ]);
@@ -198,10 +190,14 @@ const UserDashboard = () => {
     loadData();
   }, []);
 
-  // Generate chart data
+  // The rest of the component (chart data generation and JSX rendering)
+  // remains the same, but will now use the mocked values (like 0 for stats)
+  // when the API fetch fails and the mockedFallbackUserData is used.
+
+  // Generate chart data - these functions will now process 0s when fallback is used
   const generateListingsChartData = () => {
     if (!userProducts.length) return [];
-    
+
     const monthlyData = {};
     userProducts.forEach(product => {
       const month = new Date(product.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
@@ -216,7 +212,7 @@ const UserDashboard = () => {
 
   const generatePurchasesChartData = () => {
     if (!userPurchases.length) return [];
-    
+
     const monthlyData = {};
     userPurchases.forEach(purchase => {
       const month = new Date(purchase.purchaseDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
@@ -248,10 +244,10 @@ const UserDashboard = () => {
   const generateEarningsData = () => {
     const soldItems = userProducts.filter(p => p.status === 'Sold');
     const monthlyEarnings = {};
-    
+
     soldItems.forEach(item => {
       const month = new Date(item.createdAt).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-      monthlyEarnings[month] = (monthlyEarnings[month] || 0) + item.expectedPrice;
+      monthlyEarnings[month] = (monthlyEarnings[month] || 0) + (item.expectedPrice || 0); // Added || 0 safeguard
     });
 
     return Object.entries(monthlyEarnings).map(([month, earnings]) => ({
@@ -259,6 +255,7 @@ const UserDashboard = () => {
       earnings
     }));
   };
+
 
   if (loading) {
     return (
@@ -279,7 +276,7 @@ const UserDashboard = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
               <h1 className="text-xl font-bold text-black">User Dashboard</h1>
-              
+
             </div>
             <div className="flex items-center space-x-4">
               <div className="relative">
@@ -306,40 +303,47 @@ const UserDashboard = () => {
               <div className="w-24 h-24 rounded-full bg-gray-100 border-2 border-gray-200 flex items-center justify-center group-hover:border-black transition-colors duration-200">
                 <User className="w-12 h-12 text-gray-400 group-hover:text-black transition-colors duration-200" />
               </div>
+              {/* Edit icon can be kept or removed based on whether you allow editing mock data */}
               <div className="absolute -bottom-2 -right-2 bg-black text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer">
                 <Edit className="w-3 h-3" />
               </div>
             </div>
-            
+
             {/* Profile Info */}
             <div className="flex-1">
+              {/* These fields will show 'Fallback User' and 'fallback.user@example.com' */}
               <h2 className="text-2xl font-bold text-black mb-2">{userData?.name}</h2>
               <p className="text-gray-600 mb-2">{userData?.email}</p>
+              {/* Address and Bio will show mocked values */}
               <p className="text-gray-500 mb-3">{userData?.address}</p>
               {userData?.bio && (
                 <p className="text-gray-700 text-sm leading-relaxed">{userData.bio}</p>
               )}
             </div>
-            
+
             {/* Stats Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg text-center">
                 <Award className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+                {/* These will show 0 when mocked fallback data is used */}
                 <p className="text-2xl font-bold text-blue-800">{userData?.points || 0}</p>
                 <p className="text-xs text-blue-600">Points</p>
               </div>
               <div className="bg-gradient-to-r from-green-50 to-green-100 p-4 rounded-lg text-center">
                 <Activity className="w-6 h-6 text-green-600 mx-auto mb-2" />
+                 {/* These will show 0 when mocked fallback data is used */}
                 <p className="text-2xl font-bold text-green-800">{userData?.successfulSwaps || 0}</p>
                 <p className="text-xs text-green-600">Swaps</p>
               </div>
               <div className="bg-gradient-to-r from-purple-50 to-purple-100 p-4 rounded-lg text-center">
                 <TrendingUp className="w-6 h-6 text-purple-600 mx-auto mb-2" />
+                 {/* These will show 0 when mocked fallback data is used */}
                 <p className="text-2xl font-bold text-purple-800">₹{userData?.earnings || 0}</p>
                 <p className="text-xs text-purple-600">Earned</p>
               </div>
               <div className="bg-gradient-to-r from-orange-50 to-orange-100 p-4 rounded-lg text-center">
                 <ShoppingBag className="w-6 h-6 text-orange-600 mx-auto mb-2" />
+                 {/* These will show 0 when mocked fallback data is used */}
                 <p className="text-2xl font-bold text-orange-800">₹{userData?.spent || 0}</p>
                 <p className="text-xs text-orange-600">Spent</p>
               </div>
@@ -379,7 +383,7 @@ const UserDashboard = () => {
             <div className="space-y-8">
               {/* Listings Analytics */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Monthly Listings Chart */}
+                {/* Monthly Listings Chart - Will use data from fallbackProducts */}
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
                   <h3 className="text-lg font-semibold text-black mb-4">Monthly Listings</h3>
                   <ResponsiveContainer width="100%" height={250}>
@@ -393,7 +397,7 @@ const UserDashboard = () => {
                   </ResponsiveContainer>
                 </div>
 
-                {/* Category Distribution */}
+                {/* Category Distribution - Will use data from fallbackProducts */}
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
                   <h3 className="text-lg font-semibold text-black mb-4">Category Distribution</h3>
                   <ResponsiveContainer width="100%" height={250}>
@@ -417,7 +421,7 @@ const UserDashboard = () => {
                   </ResponsiveContainer>
                 </div>
 
-                {/* Earnings Over Time */}
+                {/* Earnings Over Time - Will use data from fallbackProducts (assuming status=='Sold') */}
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6 lg:col-span-2">
                   <h3 className="text-lg font-semibold text-black mb-4">Earnings Over Time</h3>
                   <ResponsiveContainer width="100%" height={300}>
@@ -432,12 +436,12 @@ const UserDashboard = () => {
                 </div>
               </div>
 
-              {/* Listings Grid */}
+              {/* Listings Grid - Will display fallbackProducts */}
               <div>
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="text-2xl font-bold text-black">My Listings ({userProducts.length})</h2>
                   <button className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors duration-200 flex items-center space-x-2 transform hover:scale-105">
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-4 h-4 inline mr-2" />
                     <span onClick={()=>navigate("/post")}>Add New</span>
                   </button>
                 </div>
@@ -453,7 +457,13 @@ const UserDashboard = () => {
                     >
                       <div className="relative">
                         <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
-                          <Package className="w-16 h-16 text-gray-400" />
+                          {/* Placeholder or generic image for fallback */}
+                          <img 
+    src={item.heroImage} 
+    alt={item.productName || "Product Image"} 
+    className="w-full h-48 object-cover rounded-md"
+    style={{ objectFit: 'contain' }}
+  />
                         </div>
                         <div className="absolute top-2 right-2 bg-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                           <Heart className="w-4 h-4 text-gray-600" />
@@ -470,17 +480,15 @@ const UserDashboard = () => {
                         <h3 className="font-semibold text-gray-900 mb-2 truncate">{item.productName}</h3>
                         <p className="text-sm text-gray-600 mb-2">{item.category}</p>
                         <div className="flex justify-between items-center mb-3">
-                          <span className="text-lg font-bold text-black">₹{item.expectedPrice}</span>
-                          <span className="text-sm text-gray-500 line-through">₹{item.originalPrice}</span>
+                         <span className="text-sm text-gray-700 font-normal" style={{ fontFamily: 'Inter, sans-serif',fontSize: '14px' }}>
+  {item.description}
+</span>
+
                         </div>
                         <div className="flex justify-between items-center text-sm text-gray-500 mb-3">
                           <span className="flex items-center">
                             <Heart className="w-3 h-3 mr-1" />
                             {item.likes}
-                          </span>
-                          <span className="flex items-center">
-                            <Eye className="w-3 h-3 mr-1" />
-                            {Math.floor(Math.random() * 100) + 20}
                           </span>
                         </div>
                         <div className="flex space-x-2">
@@ -503,9 +511,9 @@ const UserDashboard = () => {
 
           {activeTab === 'purchases' && (
             <div className="space-y-8">
-              {/* Purchases Analytics */}
+              {/* Purchases Analytics - Will use data from fallbackPurchases */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Monthly Spending Chart */}
+                {/* Monthly Spending Chart - Will use data from fallbackPurchases */}
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
                   <h3 className="text-lg font-semibold text-black mb-4">Monthly Spending</h3>
                   <ResponsiveContainer width="100%" height={250}>
@@ -519,7 +527,7 @@ const UserDashboard = () => {
                   </ResponsiveContainer>
                 </div>
 
-                {/* Purchase Count Chart */}
+                {/* Purchase Count Chart - Will use data from fallbackPurchases */}
                 <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
                   <h3 className="text-lg font-semibold text-black mb-4">Purchase Count</h3>
                   <ResponsiveContainer width="100%" height={250}>
@@ -534,7 +542,7 @@ const UserDashboard = () => {
                 </div>
               </div>
 
-              {/* Purchases Grid */}
+              {/* Purchases Grid - Will display fallbackPurchases */}
               <div>
                 <div className="flex justify-between items-center mb-6">
                   <h2 className="text-2xl font-bold text-black">My Purchases ({userPurchases.length})</h2>
@@ -554,6 +562,7 @@ const UserDashboard = () => {
                     >
                       <div className="relative">
                         <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
+                           {/* Placeholder or generic image for fallback */}
                           <ShoppingBag className="w-16 h-16 text-gray-400" />
                         </div>
                         <div className={`absolute top-2 right-2 px-2 py-1 rounded-full text-xs font-medium ${
