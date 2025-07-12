@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ProductList from './pages/ProductListing';
-import AddProductForm from './pages/AddProduct';]
+import AddProductForm from './pages/AddProduct';
 import UserDashboard from './pages/UserDashboard';
 import ProductDescription from './pages/ProductDesc';
 import SwapPage from './pages/SwapPage';
