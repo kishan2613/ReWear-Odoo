@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const ProductListing = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -233,7 +236,7 @@ const ProductListing = () => {
                         </div>
                       </div>
                       <div className="flex space-x-3">
-                        <button className="px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition-all duration-300 font-medium text-sm">
+                        <button className="px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition-all duration-300 font-medium text-sm" onClick={() => navigate(`/products/${product._id}`)}>
                           View Details
                         </button>
                       </div>
