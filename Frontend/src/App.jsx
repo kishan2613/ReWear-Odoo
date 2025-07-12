@@ -7,8 +7,12 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ProductList from './pages/ProductListing';
 import AddProductForm from './pages/AddProduct';
+
 import About from './pages/About';
 import Contact from './pages/Contact';
+import UserDashboard from './pages/UserDashboard';
+import ProductDescription from './pages/ProductDesc';
+import SwapPage from './pages/SwapPage';
 function App() {
   return (
     <Router>
@@ -17,7 +21,7 @@ function App() {
         <Navbar/>
         <div style={{ height: '80px' }} />
         <Routes>
-          {/* Home route */}
+          {/* Home route */} 
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
@@ -25,6 +29,11 @@ function App() {
           <Route path="/post" element={<AddProductForm/>} />
           <Route path="/about" element={<About/>} />
           <Route path="/contact" element={<Contact/>} />         
+
+          <Route path="/user-dashboard" element={<UserDashboard/>} />
+          <Route path="/products/:id" element={<ProductDescription />} />
+          <Route path="/swap/:id" element={<SwapPage />} />
+
         </Routes>
       </div>
       <PremiumFooter />
