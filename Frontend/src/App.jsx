@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import ProductList from './pages/ProductListing';
 import AddProductForm from './pages/AddProduct';
 import ProductDescription from './pages/ProductDesc';
+import SwapPage from './pages/SwapPage';
 function App() {
   return (
     <Router>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/products" element={<ProductList/>} />
           <Route path="/post" element={<AddProductForm/>} />
           <Route path="/products/:id" element={<ProductDescription />} />
+          <Route path="/swap/:id" element={<SwapPage />} />
         </Routes>
       </div>
       <PremiumFooter />

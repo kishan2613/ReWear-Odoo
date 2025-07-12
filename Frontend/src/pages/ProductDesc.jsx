@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 
@@ -7,6 +7,7 @@ export default function ProductDescription() {
   const [product, setProduct] = useState(null);
   const [moreProducts, setMoreProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -36,6 +37,10 @@ export default function ProductDescription() {
   }, [id]);
 
   if (loading || !product) return <div className="text-center py-10">Loading...</div>;
+
+  const handleSwapNow = () => {
+    navigate(`/swap/${id}`);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
@@ -87,6 +92,7 @@ export default function ProductDescription() {
 
           <button
             className="mt-6 bg-black text-white py-3 px-6 rounded-lg hover:bg-gray-800 transition-all font-medium"
+            onClick={handleSwapNow}
           >
             Swap Now
           </button>
