@@ -1,9 +1,9 @@
-
-
-````markdown
 # 👕 ReWear-Odoo — Sustainable Fashion Exchange Platform
 
 **ReWear** is a web-based platform that promotes sustainable fashion by allowing users to exchange unused clothes through direct swaps or a point-based redemption system. The goal is to reduce textile waste, encourage circular fashion practices, and build a community of conscious consumers.
+
+---
+
 
 ---
 
@@ -36,9 +36,6 @@ With the increasing impact of fast fashion, millions of wearable garments are di
 ```bash
 git clone https://github.com/your-username/ReWear-Odoo.git
 cd ReWear-Odoo
-````
-
----
 
 ### 🖥️ Frontend Setup
 
