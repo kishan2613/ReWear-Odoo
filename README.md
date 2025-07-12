@@ -62,25 +62,11 @@ nodemon server.js
 
 
 
----
-
 ## 📹 Video Walkthrough
 
-Check out the full walkthrough of the ReWear-Odoo platform:
+Click the link below to watch the full demo of our platform:
 
-🔗 [Watch Demo Video on YouTube](https://youtu.be/QMMN6QXhpUM)
-
-In this demo, we showcase:
-
-- 🏠 Landing Page Overview  
-- 👤 User Registration & Login  
-- 🧺 Adding a Clothing Item  
-- 🔄 Swap Request or Point Redemption  
-- 👨‍💼 Admin Moderation Flow  
-- 📱 Responsive UI on Desktop & Mobile  
-
----
-
+➡️ [Watch ReWear-Odoo Demo on YouTube](https://youtu.be/QMMN6QXhpUM)
 
 
 
