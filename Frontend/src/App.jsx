@@ -13,6 +13,8 @@ import Contact from './pages/Contact';
 import UserDashboard from './pages/UserDashboard';
 import ProductDescription from './pages/ProductDesc';
 import SwapPage from './pages/SwapPage';
+import AdminDashboard from './pages/AdminDashboard';
+
 function App() {
   return (
     <Router>
@@ -33,6 +35,7 @@ function App() {
           <Route path="/user-dashboard" element={<UserDashboard/>} />
           <Route path="/products/:id" element={<ProductDescription />} />
           <Route path="/swap/:id" element={<SwapPage />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard/>} />
 
         </Routes>
       </div>
