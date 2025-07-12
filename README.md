@@ -1,18 +1,31 @@
-# 👚 ReWear-Odoo — Sustainable Fashion Exchange Platform
+# 👕 ReWear-Odoo — Sustainable Fashion Exchange Platform
 
-**ReWear** is a web-based platform aimed at reducing textile waste by enabling users to exchange unused clothes through **direct swaps** or a **point-based system**. It promotes a circular economy in fashion and empowers individuals to contribute to sustainability effortlessly.
+**ReWear** is a web-based platform that promotes sustainable fashion by allowing users to exchange unused clothes through direct swaps or a point-based redemption system. The goal is to reduce textile waste, encourage circular fashion practices, and build a community of conscious consumers.
+
+---
+
+## 🧠 Problem Statement
+
+With the increasing impact of fast fashion, millions of wearable garments are discarded annually. This contributes to environmental harm, landfill overflow, and waste of resources. Despite having reusable clothing, many people lack an easy and trustworthy platform to exchange them.
+
+**ReWear-Odoo** addresses this by creating an intuitive platform where users can:
+- Swap clothes directly with other users.
+- Redeem points earned from listed items to claim other products.
+- Reduce textile waste and embrace sustainable living.
 
 ---
 
-## 📁 Folder Structure
+## 👥 Team Members
 
-ReWear-Odoo/
-├── Frontend/ # React frontend (UI)
-├── Backend/ # Node.js + Express backend 
-└── README.md
-
+| Role           | Name           | Email                             |
+|----------------|----------------|-----------------------------------|
+| Team Leader    | Kishan         | kishankr2613@gmail.com            |
+| Member 1       | Manas Singh    | manas.singh.it2027@gmail.com      |
+| Member 2       | Adarsh Kumar   | adarshworkjha@gmail.com           |
+| Member 3       | Lotla Yamini   | lotlayamini103156@gmail.com       |
 
 ---
+
 
 ## 🚀 Quick Start
 
@@ -26,6 +39,9 @@ cd Frontend
 npm install
 npm run dev
 
+## 🛠️ How to Use
+
+### 📦 Backend Setup
 cd Backend
 npm install
 nodemon server.js
@@ -42,3 +58,9 @@ nodemon server.js
 🖥️ Responsive UI (Mobile/Desktop)
 
 📷 Image Gallery for Items
+
+
+
+📩 Contact
+For any queries, feedback, or collaboration, contact the team leader:
+📧 Kishan — kishankr2613@gmail.com
