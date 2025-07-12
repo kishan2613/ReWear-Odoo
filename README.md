@@ -1,3 +1,6 @@
+
+
+````markdown
 # 👕 ReWear-Odoo — Sustainable Fashion Exchange Platform
 
 **ReWear** is a web-based platform that promotes sustainable fashion by allowing users to exchange unused clothes through direct swaps or a point-based redemption system. The goal is to reduce textile waste, encourage circular fashion practices, and build a community of conscious consumers.
@@ -26,7 +29,6 @@ With the increasing impact of fast fashion, millions of wearable garments are di
 
 ---
 
-
 ## 🚀 Quick Start
 
 ### 🧩 Step 1: Clone the Repository
@@ -34,42 +36,64 @@ With the increasing impact of fast fashion, millions of wearable garments are di
 ```bash
 git clone https://github.com/your-username/ReWear-Odoo.git
 cd ReWear-Odoo
+````
 
+---
+
+### 🖥️ Frontend Setup
+
+```bash
 cd Frontend
 npm install
 npm run dev
+```
 
-## 🛠️ How to Use
 
-### 📦 Backend Setup
+
+---
+
+### ⚙️ Backend Setup
+
+```bash
 cd Backend
 npm install
 nodemon server.js
+```
 
- Features
-👤 User Authentication
-
-👚 Product Listing and Upload
-
-🔁 Swap Requests or Point Redemption
-
-🧑‍💼 Admin Moderation Panel
-
-🖥️ Responsive UI (Mobile/Desktop)
-
-📷 Image Gallery for Items
+---
 
 
+## ✨ Features
+
+* 👤 User Authentication
+* 👚 Product Listing and Upload
+* 🔁 Swap Requests or Point-Based Redemption
+* 🧑‍💼 Admin Moderation Panel
+* 🖥️ Responsive UI (Mobile/Desktop)
+* 📷 Image Gallery for Items
+
+---
 
 ## 📹 Video Walkthrough
 
 Click the image below to watch the full walkthrough of ReWear-Odoo on YouTube:
 
-[![Watch ReWear-Odoo Demo](https://img.youtube.com/vi/QMMN6QXhpUM/0.jpg)](https://youtu.be/QMMN6QXhpUM)
+[![Watch the video](https://img.youtube.com/vi/QMMN6QXhpUM/maxresdefault.jpg)](https://youtu.be/QMMN6QXhpUM)
 
+If the above image doesn’t load properly, use this fallback:
 
+[![Watch the video](https://img.youtube.com/vi/QMMN6QXhpUM/0.jpg)](https://youtu.be/QMMN6QXhpUM)
 
+---
 
-📩 Contact
+## 📩 Contact
+
 For any queries, feedback, or collaboration, contact the team leader:
-📧 Kishan — kishankr2613@gmail.com
+📧 **Kishan** — [kishankr2613@gmail.com](mailto:kishankr2613@gmail.com)
+
+---
+
+© 2025 ReWear-Odoo. All Rights Reserved.
+
+```
+
