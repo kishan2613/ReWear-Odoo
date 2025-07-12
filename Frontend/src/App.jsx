@@ -5,6 +5,8 @@ import PremiumFooter from './components/footer'
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import ProductList from './pages/ProductListing';
+import AddProductForm from './pages/AddProduct';
 function App() {
   return (
     <Router>
@@ -17,6 +19,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
+          <Route path="/products" element={<ProductList/>} />
+          <Route path="/post" element={<AddProductForm/>} />
         </Routes>
       </div>
       <PremiumFooter />

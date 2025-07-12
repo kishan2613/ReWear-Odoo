@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+
 // Premium Navbar Component
 const PremiumNavbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +45,7 @@ const PremiumNavbar = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 cursor-pointer" onClick={() => navigate('/')}>
             <h1 
               className={`text-2xl md:text-3xl font-light tracking-wider transition-colors duration-300 ${
                 isScrolled ? 'text-black' : 'text-white'
@@ -94,6 +98,7 @@ const PremiumNavbar = () => {
                         key={dropdownItem}
                         className="w-full text-left px-6 py-3 text-black hover:bg-black hover:text-white transition-colors duration-300 font-medium"
                         style={{ fontFamily: 'Inter, sans-serif' }}
+                        onClick={() => navigate('/products')}
                       >
                         {dropdownItem}
                       </button>
@@ -106,40 +111,7 @@ const PremiumNavbar = () => {
 
           {/* Right Side Icons */}
           <div className="flex items-center space-x-4">
-            {/* Search Icon */}
-            <button className={`p-2 rounded-full transition-all duration-300 ${
-              isScrolled 
-                ? 'text-black hover:bg-black hover:text-white' 
-                : 'text-white hover:bg-white/10'
-            }`}>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-
-            {/* Wishlist Icon */}
-            <button className={`p-2 rounded-full transition-all duration-300 relative ${
-              isScrolled 
-                ? 'text-black hover:bg-black hover:text-white' 
-                : 'text-white hover:bg-white/10'
-            }`}>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">3</span>
-            </button>
-
-            {/* Cart Icon */}
-            <button className={`p-2 rounded-full transition-all duration-300 relative ${
-              isScrolled 
-                ? 'text-black hover:bg-black hover:text-white' 
-                : 'text-white hover:bg-white/10'
-            }`}>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-              </svg>
-              <span className="absolute -top-1 -right-1 bg-black text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">2</span>
-            </button>
+            
 
             {/* User Profile */}
             <button className={`p-2 rounded-full transition-all duration-300 ${
