@@ -11,7 +11,7 @@ import UserDashboard from "./pages/UserDashboard";
 import ProductDescription from "./pages/ProductDesc";
 import AdminDashboard from "./pages/AdminDashboard";
 import SwapPage from "./pages/SwapPage";
- 
+import ShoppingBot from "./pages/ShopingBot";
 
 function App() {
   return (
@@ -33,6 +33,7 @@ function App() {
           <Route path="/swap/:id" element={<SwapPage />} />
            
         </Routes>
+        <ShoppingBot/>
       </div>
       <PremiumFooter />
     </Router>

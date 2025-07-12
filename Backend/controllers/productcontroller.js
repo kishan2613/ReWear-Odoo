@@ -97,6 +97,38 @@ exports.likeProduct = async (req, res) => {
   }
 };
 
+// @desc    Search products by name/category only
+exports.searchProducts = async (req, res) => {
+  try {
+    const { name } = req.query;
+    
+    if (!name) {
+      return res.status(400).json({ message: 'Product name is required' });
+    }
+
+    // Build search query - search in name, category, and description
+    let query = { 
+      status: 'Available',
+      $or: [
+        { productName: { $regex: name, $options: 'i' } },
+        { category: { $regex: name, $options: 'i' } },
+        { description: { $regex: name, $options: 'i' } }
+      ]
+    };
+    
+    const products = await Product.find(query)
+      .sort({ likes: -1, createdAt: -1 }) // Sort by popularity then newest
+      .limit(5)
+      .populate('user', 'name email')
+      .select('productName category description heroImage images likes address status');
+    
+    res.status(200).json(products);
+  } catch (err) {
+    console.error('Search error:', err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+
 // @desc    Update product status
 exports.updateProductStatus = async (req, res) => {
   try {

@@ -11,5 +11,7 @@ router.get('/top-liked', productController.getTopLikedProducts);
 router.post('/like/:id', productController.likeProduct);
 router.patch('/status/:id', productController.updateProductStatus);
 router.delete('/delete/:id', productController.deleteProduct);
+// Add this to your existing product routes
+router.get('/search', productController.searchProducts);
 
 module.exports = router;
