@@ -7,92 +7,33 @@ const ProductListing = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('newest');
 
-  // Sample product data based on your schema
-  const sampleProducts = [
-    {
-      _id: "1",
-      productName: "Vintage Denim Jacket",
-      category: "Casual Wear",
-      description: "A timeless vintage denim jacket in excellent condition. Perfect for layering and adding a classic touch to any outfit. Features original brass buttons and minimal wear.",
-      heroImage: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&h=500&fit=crop",
-      likes: 24,
-      address: "Mumbai, Maharashtra",
-      status: "Available",
-      createdAt: new Date("2024-01-15")
-    },
-    {
-      _id: "2",
-      productName: "Silk Kurta Set",
-      category: "Ethnic Wear",
-      description: "Beautiful handwoven silk kurta set with intricate embroidery work. Worn only twice for special occasions. Comes with matching dupatta and comfortable cotton pants.",
-      heroImage: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=400&h=500&fit=crop",
-      likes: 18,
-      address: "Delhi, India",
-      status: "Available",
-      createdAt: new Date("2024-01-20")
-    },
-    {
-      _id: "3",
-      productName: "Designer Sneakers",
-      category: "Footwear",
-      description: "Limited edition designer sneakers in pristine condition. Authentic with original box and dust bags. Perfect for street style and casual luxury looks.",
-      heroImage: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=500&fit=crop",
-      likes: 32,
-      address: "Bangalore, Karnataka",
-      status: "In Negotiation",
-      createdAt: new Date("2024-01-25")
-    },
-    {
-      _id: "4",
-      productName: "Formal Blazer",
-      category: "Office Wear",
-      description: "Professional navy blue blazer from a premium brand. Excellent for business meetings and formal events. Tailored fit with subtle pinstripe pattern.",
-      heroImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop",
-      likes: 15,
-      address: "Chennai, Tamil Nadu",
-      status: "Available",
-      createdAt: new Date("2024-01-30")
-    },
-    {
-      _id: "5",
-      productName: "Bohemian Maxi Dress",
-      category: "Western Wear",
-      description: "Flowy bohemian maxi dress with beautiful floral prints. Perfect for summer occasions and beach vacations. Made from breathable cotton fabric with adjustable straps.",
-      heroImage: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=500&fit=crop",
-      likes: 28,
-      address: "Pune, Maharashtra",
-      status: "Available",
-      createdAt: new Date("2024-02-05")
-    },
-    {
-      _id: "6",
-      productName: "Workout Leggings",
-      category: "Women's Activewear",
-      description: "High-quality athletic leggings with moisture-wicking technology. Great for yoga, running, and gym workouts. Barely used and in excellent condition.",
-      heroImage: "https://images.unsplash.com/photo-1506629905607-64e8cc7f2f23?w=400&h=500&fit=crop",
-      likes: 22,
-      address: "Hyderabad, Telangana",
-      status: "Sold",
-      createdAt: new Date("2024-02-10")
-    }
-  ];
-
   const categories = ['All', 'Ethnic Wear', 'Casual Wear', "Men's Activewear", "Women's Activewear", 'Western Wear', 'Footwear', 'Sportswear', 'Office Wear', "Men's Ethnic Wear", "Size Inclusive Styles"];
 
   useEffect(() => {
-    setProducts(sampleProducts);
-    setFilteredProducts(sampleProducts);
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/products/all");
+        const data = await res.json();
+        if (res.ok) {
+          setProducts(data);
+          setFilteredProducts(data);
+        } else {
+          console.error("Failed to fetch products");
+        }
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      }
+    };
+    fetchProducts();
   }, []);
 
   useEffect(() => {
-    let filtered = products;
+    let filtered = [...products];
 
-    // Filter by category
     if (selectedCategory !== 'All') {
       filtered = filtered.filter(product => product.category === selectedCategory);
     }
 
-    // Filter by search query
     if (searchQuery) {
       filtered = filtered.filter(product => 
         product.productName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -100,7 +41,6 @@ const ProductListing = () => {
       );
     }
 
-    // Sort products
     switch (sortBy) {
       case 'newest':
         filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
