@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ProductList from './pages/ProductListing';
 import AddProductForm from './pages/AddProduct';
+import UserDashboard from './pages/UserDashboard';
 function App() {
   return (
     <Router>
@@ -15,12 +16,13 @@ function App() {
         <Navbar/>
         <div style={{ height: '80px' }} />
         <Routes>
-          {/* Home route */}
+          {/* Home route */} 
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/products" element={<ProductList/>} />
           <Route path="/post" element={<AddProductForm/>} />
+          <Route path="/user-dashboard" element={<UserDashboard/>} />
         </Routes>
       </div>
       <PremiumFooter />
