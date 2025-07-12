@@ -16,6 +16,14 @@ export default function Login() {
     return;
   }
 
+  // Admin shortcut
+  if (email === "admin@gmail.com" && password === "admin1234") {
+    localStorage.setItem("isAdminRewear", "true");
+    setMessage("Admin login successful!");
+    setTimeout(() => navigate("/admin-dashboard"), 1000);
+    return;
+  }
+
   try {
     const res = await fetch("http://localhost:5000/api/auth/login", {
       method: "POST",

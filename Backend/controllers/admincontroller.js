@@ -1,150 +1,93 @@
-import React, { useState, useEffect } from 'react';
-import { User, Package, BarChart3, Eye, Trash2, Search, Settings } from 'lucide-react';
+const User = require('../models/User');
+const Product = require('../models/Product');
 
-const API_BASE = 'http://localhost:5000/api/admin';
-const ADMIN_TOKEN = 'supersecrettoken123'; // Optional: move to .env or localStorage
+const ADMIN_ACCESS_TOKEN = 'supersecrettoken123'; // Replace with your actual token
 
-export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState('users');
-  const [users, setUsers] = useState([]);
-  const [products, setProducts] = useState([]);
-  const [stats, setStats] = useState({ users: 0, products: 0 });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+// Utility: Check token once at top of each function
+const checkAdmin = (req, res) => {
+  if (req.body.adminToken !== ADMIN_ACCESS_TOKEN) {
+    res.status(403).json({ message: 'Access denied: Invalid admin token' });
+    return false;
+  }
+  return true;
+};
 
-  useEffect(() => {
-    fetchData();
-  }, [activeTab]);
+// Get all users
+exports.getAllUsers = async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  try {
+    const users = await User.find().select('-password');
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to fetch users' });
+  }
+};
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      if (activeTab === 'users') {
-        const res = await fetch(`${API_BASE}/users`, {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ adminToken: ADMIN_TOKEN })
-        });
-        const data = await res.json();
-        setUsers(data.length ? data : fallbackUsers());
-      } else if (activeTab === 'listings') {
-        const res = await fetch(`${API_BASE}/products`, {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ adminToken: ADMIN_TOKEN })
-        });
-        const data = await res.json();
-        setProducts(data.length ? data : fallbackProducts());
-      } else if (activeTab === 'stats') {
-        const res = await fetch(`${API_BASE}/stats`, {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ adminToken: ADMIN_TOKEN })
-        });
-        const data = await res.json();
-        setStats(data);
-      }
-    } catch (err) {
-      console.error(err);
-      setError('Failed to load data. Showing fallback info.');
-      if (activeTab === 'users') setUsers(fallbackUsers());
-      if (activeTab === 'listings') setProducts(fallbackProducts());
-    } finally {
-      setLoading(false);
-    }
-  };
+// Get single user
+exports.getUserById = async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  try {
+    const user = await User.findById(req.params.id).select('-password');
+    if (!user) return res.status(404).json({ message: 'User not found' });
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching user' });
+  }
+};
 
-  const handleDelete = async (type, id) => {
-    const endpoint = type === 'user' ? 'user' : 'product';
-    try {
-      await fetch(`${API_BASE}/${endpoint}/${id}`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ adminToken: ADMIN_TOKEN })
-      });
-      if (type === 'user') setUsers(prev => prev.filter(u => u._id !== id));
-      if (type === 'product') setProducts(prev => prev.filter(p => p._id !== id));
-    } catch (err) {
-      setError(`Failed to delete ${type}`);
-    }
-  };
+// Delete a user
+exports.deleteUser = async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'User deleted' });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to delete user' });
+  }
+};
 
-  const fallbackUsers = () => ([
-    { _id: '1', name: 'Fallback User', email: 'fallback@example.com', role: 'user', createdAt: new Date() }
-  ]);
+// Get all products
+exports.getAllProducts = async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  try {
+    const products = await Product.find().populate('user', 'name email');
+    res.status(200).json(products);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching products' });
+  }
+};
 
-  const fallbackProducts = () => ([
-    { _id: '1', name: 'Fallback Item', description: 'Offline data', price: 99.99, category: 'Misc', createdAt: new Date() }
-  ]);
+// Get a single product
+exports.getProductById = async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ message: 'Product not found' });
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching product' });
+  }
+};
 
-  const filteredUsers = users.filter(u =>
-    u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    u.email.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+// Delete a product
+exports.deleteProduct = async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Product deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error deleting product' });
+  }
+};
 
-  const filteredProducts = products.filter(p =>
-    p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    p.description.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
-
-      {/* Tabs */}
-      <div className="flex gap-4 mb-4">
-        <button onClick={() => setActiveTab('users')}>Users</button>
-        <button onClick={() => setActiveTab('listings')}>Listings</button>
-        <button onClick={() => setActiveTab('stats')}>Stats</button>
-      </div>
-
-      {/* Search */}
-      <input
-        type="text"
-        placeholder="Search..."
-        className="mb-4 p-2 border"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-
-      {/* Error */}
-      {error && <p className="text-red-500">{error}</p>}
-
-      {/* Loading */}
-      {loading && <p>Loading...</p>}
-
-      {/* Render Tabs */}
-      {activeTab === 'users' && (
-        filteredUsers.map(user => (
-          <div key={user._id} className="border p-2 mb-2 flex justify-between">
-            <div>
-              <p><strong>{user.name}</strong> - {user.email}</p>
-              <p>Role: {user.role} | Joined: {new Date(user.createdAt).toLocaleDateString()}</p>
-            </div>
-            <button onClick={() => handleDelete('user', user._id)}>Delete</button>
-          </div>
-        ))
-      )}
-
-      {activeTab === 'listings' && (
-        filteredProducts.map(product => (
-          <div key={product._id} className="border p-2 mb-2 flex justify-between">
-            <div>
-              <p><strong>{product.name}</strong> - ${product.price}</p>
-              <p>{product.description}</p>
-            </div>
-            <button onClick={() => handleDelete('product', product._id)}>Delete</button>
-          </div>
-        ))
-      )}
-
-      {activeTab === 'stats' && (
-        <div>
-          <p>Total Users: {stats.users}</p>
-          <p>Total Products: {stats.products}</p>
-        </div>
-      )}
-    </div>
-  );
-}
+// Platform Stats
+exports.getStats = async (req, res) => {
+  if (!checkAdmin(req, res)) return;
+  try {
+    const userCount = await User.countDocuments();
+    const productCount = await Product.countDocuments();
+    res.status(200).json({ users: userCount, products: productCount });
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching stats' });
+  }
+};
