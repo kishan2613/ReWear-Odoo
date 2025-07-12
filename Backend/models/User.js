@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
   bio: {
     type: String,
     maxlength: 500,
-    default: ''
+    default: 'This is th default bio. Please update it.'
   },
   
   // User Statistics & Activity
