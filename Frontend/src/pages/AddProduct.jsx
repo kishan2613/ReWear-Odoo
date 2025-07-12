@@ -39,31 +39,48 @@ const AddProductForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const res = await fetch("http://localhost:5000/api/products/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      });
+  e.preventDefault();
+  setLoading(true);
 
-      const data = await res.json();
-      if (res.ok) {
-        setMessage("Product listed successfully!");
-        setTimeout(() => navigate("/products"), 2000);
-      } else {
-        setMessage(data.message || "Failed to list product");
-      }
-    } catch (err) {
-      setMessage("Server Error: " + err.message);
-      navigate("/")
-    } finally {
+  try {
+    // Get user ID from localStorage
+    const userId = localStorage.getItem("userIDRewear");
+
+    if (!userId) {
+      setMessage("User not logged in. Please login first.");
       setLoading(false);
+      return;
     }
-  };
+
+    // Include the user ID in formData
+    const payload = {
+      ...formData,
+      user: userId,
+    };
+
+    const res = await fetch("http://localhost:5000/api/products/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      setMessage("Product listed successfully!");
+      setTimeout(() => navigate("/products"), 2000);
+    } else {
+      setMessage(data.message || "Failed to list product");
+    }
+  } catch (err) {
+    setMessage("Server Error: " + err.message);
+    navigate("/");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
    <div className="min-h-screen bg-gray-50 py-10 px-4">
