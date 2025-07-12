@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ProductList from './pages/ProductListing';
 import AddProductForm from './pages/AddProduct';
+import About from './pages/About';
+import Contact from './pages/Contact';
 function App() {
   return (
     <Router>
@@ -21,6 +23,8 @@ function App() {
           <Route path="/signup" element={<Signup/>} />
           <Route path="/products" element={<ProductList/>} />
           <Route path="/post" element={<AddProductForm/>} />
+          <Route path="/about" element={<About/>} />
+          <Route path="/contact" element={<Contact/>} />         
         </Routes>
       </div>
       <PremiumFooter />

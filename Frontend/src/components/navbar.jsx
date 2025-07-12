@@ -72,6 +72,12 @@ const PremiumNavbar = () => {
                       : 'text-white hover:bg-white/10'
                   }`}
                   style={{ fontFamily: 'Inter, sans-serif' }}
+                  onClick={() => {
+    if (!item.hasDropdown) {
+      const lower = item.name.toLowerCase();
+      navigate(`/${lower === 'about' || lower === 'contact' ? lower : ''}`);
+    }
+  }}
                 >
                   <span>{item.name}</span>
                   {item.hasDropdown && (

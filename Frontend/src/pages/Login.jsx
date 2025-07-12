@@ -19,9 +19,7 @@ export default function Login() {
     try {
       const res = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
       });
 
@@ -31,106 +29,104 @@ export default function Login() {
         localStorage.setItem("userIDRewear", data.userId);
         setMessage("Login successful!");
         setTimeout(() => {
-          navigate("/"); // Navigate to home or dashboard
+          navigate("/");
         }, 1500);
       } else {
         setMessage(data.message || "Login failed.");
       }
     } catch (error) {
       setMessage("Something went wrong. Please try again later.");
-      console.log(error)
+      console.log(error);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center p-2">
-      <div className="w-full max-w-6xl flex items-center justify-center relative">
+    <div className="min-h-screen  pb-16 px-4 bg-white text-gray-800">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-10">
         
-        {/* Left side - Image */}
-        <div className="hidden lg:flex lg:w-1/2 relative justify-center items-center">
-          <div className="w-full h-full top-0">
-            <img 
-              src={LoginImg} 
-              alt="Login illustration" 
-              className="max-w-full max-h-full rounded-2xl object-contain"
-            />
-          </div>
+        {/* Left - Image */}
+        <div className="hidden md:block md:w-1/2">
+          <img
+            src={LoginImg}
+            alt="Login Visual"
+            className="rounded-2xl object-cover shadow-xl"
+          />
         </div>
 
-        {/* Right side - Login Form */}
-        <div className="w-full lg:w-1/2 max-w-md mx-auto">
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <div className="text-center mb-8">
-              <h1 className="text-2xl font-bold text-gray-800 mb-2">Welcome to Rewear! 👋</h1>
-              <p className="text-gray-600">Please sign-in to your account and start the adventure</p>
+        {/* Right - Form */}
+        <div className="w-full md:w-1/2 bg-gray-50 p-8 rounded-2xl shadow-xl">
+          <div className="mb-8 text-center">
+            <h1
+              className="text-3xl font-bold"
+              style={{ fontFamily: 'Playfair Display, serif' }}
+            >
+              Welcome Back to ReWear
+            </h1>
+            <p className="text-gray-500 text-sm mt-2">Sign in to continue your fashion journey.</p>
+          </div>
+
+          <div className="space-y-5">
+            {/* Email */}
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:outline-none"
+              />
             </div>
 
-            <div className="space-y-6">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email
-                </label>
+            {/* Password */}
+            <div>
+              <label className="block mb-1 text-sm font-medium text-gray-700">Password</label>
+              <div className="relative">
                 <input
-                  type="text"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg pr-12 focus:ring-2 focus:ring-black focus:outline-none"
                 />
-              </div>
-
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                  Password
-                </label>
-                <div className="relative">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all pr-12"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
-                  >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <button className="text-sm text-[#333333] cursor-pointer hover:text-black font-medium">
-                  Forgot password?
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
+            </div>
 
-              <button
-                type="button"
-                onClick={handleLogin}
-                className="w-full cursor-pointer bg-[#202020] text-white py-3 px-4 rounded-lg hover:bg-black-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium"
-              >
-                Login
+            {/* Forgot Password */}
+            <div className="text-right">
+              <button className="text-sm text-gray-500 hover:text-black font-medium">
+                Forgot Password?
               </button>
+            </div>
 
-              {/* Message Feedback */}
-              {message && (
-                <p className="text-center text-sm text-red-600 font-medium">{message}</p>
-              )}
+            {/* Login Button */}
+            <button
+              onClick={handleLogin}
+              className="w-full bg-black text-white py-3 rounded-full hover:bg-gray-900 transition-colors font-medium"
+            >
+              Sign In
+            </button>
 
-              <div className="text-center">
-                <span className="text-gray-600">New on our platform? </span>
-                <Link to="/signup">
-                  <button className="text-[#333333] hover:text-black font-medium cursor-pointer">
-                    Create an account
-                  </button>
+            {/* Message */}
+            {message && (
+              <p className="text-center text-sm text-red-600 font-medium">{message}</p>
+            )}
+
+            {/* Signup */}
+            <div className="text-center">
+              <p className="text-sm text-gray-600">
+                Don’t have an account?
+                <Link to="/signup" className="ml-1 text-black font-medium hover:underline">
+                  Create one
                 </Link>
-              </div>
-
+              </p>
             </div>
           </div>
         </div>
