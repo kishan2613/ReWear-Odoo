@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { formatDistanceToNow } from "date-fns";
 
 export default function ProductDescription() {
   const { id } = useParams();
@@ -83,7 +82,7 @@ export default function ProductDescription() {
               {product.description}
             </p>
             <p className="text-sm text-gray-600 font-medium">
-              Posted {formatDistanceToNow(new Date(product.createdAt))} ago
+              Posted {"1 day"} ago
             </p>
             <p className="text-sm text-gray-600 font-medium">Location: {product.address}</p>
             <p className="text-sm text-gray-600 font-medium">Likes: {product.likes}</p>
@@ -116,7 +115,7 @@ export default function ProductDescription() {
               <h3 className="text-lg font-semibold">{prod.productName}</h3>
               <p className="text-sm text-gray-600">{prod.category}</p>
               <p className="text-xs text-gray-500 mt-1">{prod.address}</p>
-              <p className="text-xs text-gray-500">{formatDistanceToNow(new Date(prod.createdAt))} ago</p>
+              <p className="text-xs text-gray-500">{"1 day"} ago</p>
               <a href={`/products/${prod._id}`}>
                 <button className="mt-3 w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 text-sm font-medium">
                   View Product
