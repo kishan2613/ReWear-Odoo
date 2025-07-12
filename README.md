@@ -61,17 +61,11 @@ nodemon server.js
 
 
 
-
 ## 📹 Video Walkthrough
 
-Click the link below to watch the full demo of our platform:
+Click below to watch the full demo:
 
-➡️ [Watch ReWear-Odoo Demo on YouTube](https://youtu.be/QMMN6QXhpUM)
-
-
-
-
-
+[Watch ReWear-Odoo Demo on YouTube](https://youtu.be/QMMN6QXhpUM)
 
 
 
