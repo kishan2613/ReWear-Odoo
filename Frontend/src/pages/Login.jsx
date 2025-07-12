@@ -1,17 +1,49 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import LoginImg from "../assets/Login.jpg";
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      setMessage("Please fill in all fields.");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+
+      if (res.status === 200) {
+        localStorage.setItem("userIDRewear", data.userId);
+        setMessage("Login successful!");
+        setTimeout(() => {
+          navigate("/"); // Navigate to home or dashboard
+        }, 1500);
+      } else {
+        setMessage(data.message || "Login failed.");
+      }
+    } catch (error) {
+      setMessage("Something went wrong. Please try again later.");
+      console.log(error)
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br  from-gray-50 to-blue-50 flex items-center justify-center p-2">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center p-2">
       <div className="w-full max-w-6xl flex items-center justify-center relative">
         
         {/* Left side - Image */}
@@ -19,7 +51,7 @@ export default function Login() {
           <div className="w-full h-full top-0">
             <img 
               src={LoginImg} 
-              alt="Login illustration with character, rocket, clock and geometric shapes" 
+              alt="Login illustration" 
               className="max-w-full max-h-full rounded-2xl object-contain"
             />
           </div>
@@ -43,7 +75,7 @@ export default function Login() {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email or username"
+                  placeholder="Enter your email"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                 />
               </div>
@@ -79,21 +111,26 @@ export default function Login() {
 
               <button
                 type="button"
+                onClick={handleLogin}
                 className="w-full cursor-pointer bg-[#202020] text-white py-3 px-4 rounded-lg hover:bg-black-500 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium"
               >
                 Login
               </button>
 
+              {/* Message Feedback */}
+              {message && (
+                <p className="text-center text-sm text-red-600 font-medium">{message}</p>
+              )}
+
               <div className="text-center">
                 <span className="text-gray-600">New on our platform? </span>
-                <Link to="/signup"><button className="text-[#333333] hover:text-black font-medium cursor-pointer">
-                  Create an account
-                </button></Link>
+                <Link to="/signup">
+                  <button className="text-[#333333] hover:text-black font-medium cursor-pointer">
+                    Create an account
+                  </button>
+                </Link>
               </div>
 
-              
-
-             
             </div>
           </div>
         </div>
