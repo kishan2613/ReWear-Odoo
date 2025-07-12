@@ -27,16 +27,22 @@ export default function Login() {
 
       if (res.status === 200) {
         localStorage.setItem("userIDRewear", data.userId);
-        setMessage("Login successful!");
-        setTimeout(() => {
-          navigate("/");
-        }, 1500);
+
+        if (data.adminAccessToken) {
+          localStorage.setItem("isAdminRewear", "true");
+          setMessage("Admin login successful!");
+          setTimeout(() => navigate("/admin-dashboard"), 1000);
+        } else {
+          localStorage.setItem("isAdminRewear", "false");
+          setMessage("Login successful!");
+          setTimeout(() => navigate("/"), 1500);
+        }
       } else {
         setMessage(data.message || "Login failed.");
       }
     } catch (error) {
       setMessage("Something went wrong. Please try again later.");
-      console.log(error);
+      console.error("Login error:", error);
     }
   };
 
@@ -134,3 +140,4 @@ export default function Login() {
     </div>
   );
 }
+

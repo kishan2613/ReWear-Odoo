@@ -18,10 +18,10 @@ function App() {
     <Router>
       <div>
         {/* <Navigation /> */}
-        <Navbar/>
-        <div style={{ height: '80px' }} />
+        <Navbar />
+        <div style={{ height: "80px" }} />
         <Routes>
-          {/* Home route */} 
+          {/* Home route */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
@@ -38,7 +38,7 @@ function App() {
       </div>
       <PremiumFooter />
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
