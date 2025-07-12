@@ -10,37 +10,50 @@ export default function Login() {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    if (!email || !password) {
-      setMessage("Please fill in all fields.");
-      return;
-    }
+ const handleLogin = async () => {
+  if (!email || !password) {
+    setMessage("Please fill in all fields.");
+    return;
+  }
 
-    try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, password })
-      });
+  try {
+    const res = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (res.status === 200) {
-        localStorage.setItem("userIDRewear", data.userId);
+    if (res.status === 200) {
+      // Save userId in localStorage
+      localStorage.setItem("userIDRewear", data.userId);
+
+      // Optional: Save admin token or flag if admin
+      if (data.adminAccessToken) {
+        localStorage.setItem("isAdminRewear", "true");
+        setMessage("Admin login successful!");
+        setTimeout(() => {
+          navigate("/admin-dashboard");
+        }, 1000);
+      } else {
+        localStorage.setItem("isAdminRewear", "false");
         setMessage("Login successful!");
         setTimeout(() => {
-          navigate("/"); // Navigate to home or dashboard
-        }, 1500);
-      } else {
-        setMessage(data.message || "Login failed.");
+          navigate("/user-dashboard");
+        }, 1000);
       }
-    } catch (error) {
-      setMessage("Something went wrong. Please try again later.");
-      console.log(error)
+    } else {
+      setMessage(data.message || "Login failed.");
     }
-  };
+  } catch (error) {
+    setMessage("Something went wrong. Please try again later.");
+    console.log(error);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center p-2">
