@@ -6,7 +6,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ProductList from './pages/ProductListing';
-import AddProductForm from './pages/AddProduct';
+import AddProductForm from './pages/AddProduct';]
+import UserDashboard from './pages/UserDashboard';
 import ProductDescription from './pages/ProductDesc';
 import SwapPage from './pages/SwapPage';
 function App() {
@@ -17,12 +18,13 @@ function App() {
         <Navbar/>
         <div style={{ height: '80px' }} />
         <Routes>
-          {/* Home route */}
+          {/* Home route */} 
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/products" element={<ProductList/>} />
           <Route path="/post" element={<AddProductForm/>} />
+          <Route path="/user-dashboard" element={<UserDashboard/>} />
           <Route path="/products/:id" element={<ProductDescription />} />
           <Route path="/swap/:id" element={<SwapPage />} />
         </Routes>
